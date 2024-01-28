@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     #Internal Apps
     'users',
     'blog',
+    'blogs',
 ]
 
 MIDDLEWARE = [
