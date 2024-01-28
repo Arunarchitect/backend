@@ -153,6 +153,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CORS_ALLOWED_ORIGINS = [
     "https://modelflick.com:5000",
     "https://sub.example.com",
-    "http://localhost:8080",
+    "http://localhost:3000",
     "http://127.0.0.1:9000",
 ]
