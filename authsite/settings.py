@@ -153,8 +153,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # cors allowed origins
 CORS_ALLOWED_ORIGINS = [
-    "https://modelflick.com:5000",
+    "https://modelflick.com",
     "https://sub.example.com",
     "http://localhost:3000",
+    "http://localhost:5000",
     "http://127.0.0.1:9000",
 ]
