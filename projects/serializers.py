@@ -15,5 +15,6 @@ class ProjectSerializer(serializers.ModelSerializer):
             'start_date', 
             'end_date', 
             'description', 
-            'image'
+            'image',
+            'passcode'
         ]

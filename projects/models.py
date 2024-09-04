@@ -16,6 +16,7 @@ class Project(models.Model):
         max_length=255,
         blank=False,
     )
+    passcode = models.IntegerField(default=1234)  # New field with a default value
 
     def __str__(self):
         return f"{self.client_name} - {self.project_type}"
