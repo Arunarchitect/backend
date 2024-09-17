@@ -17,6 +17,14 @@ from datetime import timedelta
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+from decouple import Config, RepositoryEnv
+import os
+
+# Load environment variables from .env file
+config = Config(RepositoryEnv('.env'))
+
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -89,6 +97,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Use the PostgreSQL backend
+#         'NAME': config('DATABASE_NAME'),  # Database name
+#         'USER': config('DATABASE_USER'),  # Database user
+#         'PASSWORD': config('DATABASE_PASSWORD'),  # Database password
+#         'HOST': config('DATABASE_HOST'),  # Database host
+#         'PORT': config('DATABASE_PORT'),  # Database port
+#     }
+# }
 
 
 # Password validation
