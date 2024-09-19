@@ -178,3 +178,17 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:9000",
     "http://127.0.0.1:5000",
 ]
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'content-type',
+    'authorization',
+    # Add any other headers you need
+]
+
+CORS_ALLOW_METHODS = list(default_methods) + [
+    'GET',
+    'POST',
+    'OPTIONS',
+    # Add other methods if needed
+]
+
