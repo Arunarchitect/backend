@@ -32,7 +32,7 @@ config = Config(RepositoryEnv('.env'))
 SECRET_KEY = 'django-insecure-rxes6_awe(6cr33g24tk==6ruroof&s@a2a10rf014ai1#hl#e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
@@ -166,7 +166,7 @@ SIMPLE_JWT = {
 AUTH_USER_MODEL = 'users.UserAccount'
 
 # media settings
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # cors allowed origins
@@ -177,24 +177,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5000",
     "http://127.0.0.1:9000",
     "http://127.0.0.1:5000",
-]
-
-from corsheaders.defaults import default_headers
-
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    'content-type',
-    'authorization',
-    # Add any other headers you need
-]
-from corsheaders.defaults import default_methods
-CORS_ALLOW_METHODS = list(default_methods) + [
-    'GET',
-    'POST',
-    'PUT',
-    'PATCH',
-    'DELETE',
-    'OPTIONS',
+    "https://api.modelflick.com",
 ]
 
 
