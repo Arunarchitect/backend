@@ -179,16 +179,22 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5000",
 ]
 
+from corsheaders.defaults import default_headers
+
+
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'content-type',
     'authorization',
     # Add any other headers you need
 ]
-
+from corsheaders.defaults import default_methods
 CORS_ALLOW_METHODS = list(default_methods) + [
     'GET',
     'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
     'OPTIONS',
-    # Add other methods if needed
 ]
+
 
