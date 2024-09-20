@@ -32,7 +32,7 @@ config = Config(RepositoryEnv('.env'))
 SECRET_KEY = 'django-insecure-rxes6_awe(6cr33g24tk==6ruroof&s@a2a10rf014ai1#hl#e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 
@@ -169,6 +169,7 @@ AUTH_USER_MODEL = 'users.UserAccount'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
 # cors allowed origins
 CORS_ALLOWED_ORIGINS = [
     "https://modelflick.com",
@@ -177,7 +178,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5000",
     "http://127.0.0.1:9000",
     "http://127.0.0.1:5000",
-    "https://api.modelflick.com",
 ]
+
 
 
