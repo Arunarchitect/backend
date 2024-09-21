@@ -7,7 +7,7 @@ class ProjectImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image', 'image_name']
 
 class ProjectSerializer(serializers.ModelSerializer):
-    images = ProjectImageSerializer(many=True, read_only=True)  # Read-only
+    images = ProjectImageSerializer(many=True, read_only=True)  # Read-only for images
 
     class Meta:
         model = Project
@@ -17,17 +17,21 @@ class ProjectSerializer(serializers.ModelSerializer):
             'location', 
             'project_type', 
             'builtup_area', 
-            'project_stage', 
             'start_date', 
             'end_date', 
             'description', 
             'image', 
             'passcode',
-            'images'  # List of 360-degree images
+            'images',
+            'lod100_status',
+            'lod200_status',
+            'lod300_status',
+            'lod400_status',
+            'lod500_status',
         ]
 
 class ProjectCreateSerializer(serializers.ModelSerializer):
-    images = serializers.ListSerializer(child=serializers.DictField(), write_only=True)
+    images = ProjectImageSerializer(many=True, write_only=True)
 
     class Meta:
         model = Project
@@ -37,34 +41,34 @@ class ProjectCreateSerializer(serializers.ModelSerializer):
             'location', 
             'project_type', 
             'builtup_area', 
-            'project_stage', 
             'start_date', 
             'end_date', 
             'description', 
             'image', 
             'passcode',
-            'images'  # List of 360-degree images
+            'images',
+            'lod100_status',
+            'lod200_status',
+            'lod300_status',
+            'lod400_status',
+            'lod500_status',
         ]
 
     def create(self, validated_data):
         images_data = validated_data.pop('images', [])
         project = Project.objects.create(**validated_data)
+
         for image_data in images_data:
             ProjectImage.objects.create(project=project, **image_data)
+
         return project
 
     def update(self, instance, validated_data):
         images_data = validated_data.pop('images', [])
-        instance.client_name = validated_data.get('client_name', instance.client_name)
-        instance.location = validated_data.get('location', instance.location)
-        instance.project_type = validated_data.get('project_type', instance.project_type)
-        instance.builtup_area = validated_data.get('builtup_area', instance.builtup_area)
-        instance.project_stage = validated_data.get('project_stage', instance.project_stage)
-        instance.start_date = validated_data.get('start_date', instance.start_date)
-        instance.end_date = validated_data.get('end_date', instance.end_date)
-        instance.description = validated_data.get('description', instance.description)
-        instance.passcode = validated_data.get('passcode', instance.passcode)
-        instance.image = validated_data.get('image', instance.image)
+
+        # Update Project fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
         instance.save()
 
         # Handle images
@@ -83,8 +87,8 @@ class ProjectCreateSerializer(serializers.ModelSerializer):
                 except ProjectImage.DoesNotExist:
                     continue
             else:
-                ProjectImage.objects.create(project=instance, **image_data)
-                new_images.add(image.id)
+                new_image = ProjectImage.objects.create(project=instance, **image_data)
+                new_images.add(new_image.id)
 
         # Delete removed images
         for image_id in existing_images - new_images:

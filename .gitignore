@@ -60,3 +60,5 @@ dist-ssr
 
 # Ignore media files
 media/
+
+backup.sql
